@@ -28,6 +28,8 @@ function createBot() {
   });
 }
 
+createBot(); // Call the function to initialize the bot
+
 app.get("/", (req, res) => {
   try {
     const bot = mineflayer.createBot({
@@ -48,13 +50,22 @@ app.get("/", (req, res) => {
 
     bot.on("error", (err) => console.log(err));
     bot.on("end", () => {
-      res.send("Bot has disconnected");
-      setTimeout(createBot, 5000);
+      console.log("Bot has disconnected");
+      // If you want to send a response when the bot disconnects, you need to handle it properly
+      // res.send("Bot has disconnected"); // This can cause an error since res.send was already called on login
+      setTimeout(() => {
+        createBot();
+      }, 5000);
     });
-    res.send("Minecraft Bot is running");
+
+    console.log("Bot created for / route");
   } catch (error) {
-    res.send(error);
+    res.send(error.toString());
   }
+});
+
+app.get("/test", (req, res) => {
+  res.send("test");
 });
 
 app.listen(PORT, () => {
