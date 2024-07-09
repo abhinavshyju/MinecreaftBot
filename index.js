@@ -5,7 +5,12 @@ const PORT = process.env.PORT || 3000;
 require("./bot");
 
 app.get("/", (req, res) => {
-  res.send("Minecraft Bot is running");
+  try {
+    require("./bot");
+    res.send("Minecraft Bot is running");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.listen(PORT, () => {
