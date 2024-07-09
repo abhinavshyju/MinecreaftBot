@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
     });
 
     bot.on("login", () => {
-      console.log("Bot has logged in");
+      res.send("Bot has logged in");
       bot.chat("Hello, world!");
     });
 
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 
     bot.on("error", (err) => console.log(err));
     bot.on("end", () => {
-      console.log("Bot has disconnected");
+      res.send("Bot has disconnected");
       setTimeout(createBot, 5000);
     });
     res.send("Minecraft Bot is running");
