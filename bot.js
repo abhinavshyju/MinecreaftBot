@@ -2,8 +2,8 @@ const mineflayer = require("mineflayer");
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: "abhinavsachu.aternos.me",
-    port: 18438,
+    host: "51mple.aternos.me",
+    port: 43008,
     username: "Bot",
     version: "1.20.4",
   });
@@ -70,54 +70,6 @@ function createBot() {
   bot.on("chat", (username, message) => {
     if (username === bot.username) return;
     bot.chat(`You said: ${message}`);
-
-    // Clear all control states before handling chat commands
-    bot.setControlState("forward", false);
-    bot.setControlState("back", false);
-    bot.setControlState("left", false);
-    bot.setControlState("right", false);
-    bot.setControlState("jump", false);
-    bot.setControlState("sneak", false);
-
-    // Handle chat commands for movement
-    switch (message) {
-      case "f":
-        bot.setControlState("forward", true);
-        console.log("Moving forward");
-        break;
-      case "b":
-        bot.setControlState("back", true);
-        console.log("Moving back");
-        break;
-      case "l":
-        bot.setControlState("left", true);
-        console.log("Moving left");
-        break;
-      case "rt":
-        bot.setControlState("right", true);
-        console.log("Moving right");
-        break;
-      case "j":
-        bot.setControlState("jump", true);
-        console.log("Jumping");
-        break;
-      case "s":
-        bot.setControlState("sneak", true);
-        console.log("Sneaking");
-        break;
-      default:
-        console.log("Unknown direction");
-    }
-
-    // Reset all control states after 1 second
-    setTimeout(() => {
-      bot.setControlState("forward", false);
-      bot.setControlState("back", false);
-      bot.setControlState("left", false);
-      bot.setControlState("right", false);
-      bot.setControlState("jump", false);
-      bot.setControlState("sneak", false);
-    }, 1000);
   });
 
   bot.on("error", (err) => console.log(err));
